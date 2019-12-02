@@ -52,7 +52,7 @@ int main(int argc, char **argv) {
     std::string output_file_name = "pi.csv";
     std::ofstream output_file;
     output_file.open(output_file_name);
-    output_file << "Iterations,Result,Absolute deviation" << std::endl;
+    output_file << "iterations,estimate,abs_dev" << std::endl;
 
     for (unsigned int i = 0; i < record_iteration.size(); ++i){
         output_file << record_iteration[i] << ",";
