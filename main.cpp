@@ -18,6 +18,7 @@ int main(int argc, char **argv) {
     std::uniform_real_distribution<double> random(0., 1.);
 
     // Initialize all counters
+    double pi_estimate;
     unsigned long long int counter = 0;
     unsigned long long int maximum_iterations = strtoul(argv[1], nullptr, 0);
     unsigned long long int next_record = 10;
@@ -38,9 +39,10 @@ int main(int argc, char **argv) {
 
         // Write intermediate result in output file
         if (i == next_record){
+            pi_estimate = 4. * double(counter) / double(i);
             record_iteration.push_back(i);
-            record_estimate.push_back(4. * double(counter) / double(i));
-            record_deviation.push_back(std::abs(4 * double(counter) / double(i) - M_PI));
+            record_estimate.push_back(pi_estimate);
+            record_deviation.push_back(std::abs(pi_estimate - M_PI));
             next_record *= 10;
         }
 
