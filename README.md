@@ -5,5 +5,5 @@ It is a frist try to make a *Makefile*.
 
 Stuff for another day to do:
 * Maybe I try myself later a bit with parallelization.
-* Write the recorded values in vectors first and output everything into an csv at the end.
 * Maybe there is an even less efficient way?! :)
+* ~~Write the recorded values in vectors first and output everything into an csv at the end.~~
