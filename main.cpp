@@ -8,6 +8,7 @@
 #include <fstream>
 #include <random>
 #include <cmath>
+#include <vector>
 
 int main(int argc, char **argv) {
 
@@ -16,16 +17,14 @@ int main(int argc, char **argv) {
     engine.seed(314);
     std::uniform_real_distribution<double> random(0., 1.);
 
-    // Prepare the output file
-    std::string output_file_name = "pi.csv";
-    std::ofstream output_file;
-    output_file.open(output_file_name);
-    output_file << "Iterations,Result,Absolute deviation" << std::endl;
-
     // Initialize all counters
     unsigned long long int counter = 0;
     unsigned long long int maximum_iterations = strtoul(argv[1], nullptr, 0);
     unsigned long long int next_record = 10;
+
+    std::vector<unsigned long long int> record_iteration;
+    std::vector<double> record_estimate;
+    std::vector<double> record_deviation;
 
     std::cout << "Maximum iterations: " << maximum_iterations << std::endl;
 
@@ -39,14 +38,26 @@ int main(int argc, char **argv) {
 
         // Write intermediate result in output file
         if (i == next_record){
-            output_file << i << ",";
-            output_file << 4 * double(counter) / double(i) << ",",
-            output_file << std::abs(4 * double(counter) / double(i) - M_PI) << std::endl;
+            record_iteration.push_back(i);
+            record_estimate.push_back(4. * double(counter) / double(i));
+            record_deviation.push_back(std::abs(4 * double(counter) / double(i) - M_PI));
             next_record *= 10;
         }
 
     }
 
+    // Prepare the output file
+    std::string output_file_name = "pi.csv";
+    std::ofstream output_file;
+    output_file.open(output_file_name);
+    output_file << "Iterations,Result,Absolute deviation" << std::endl;
+
+    for (unsigned int i = 0; i < record_iteration.size(); ++i){
+        output_file << record_iteration[i] << ",";
+        output_file << record_estimate[i] << ",",
+        output_file << record_deviation[i] << std::endl;
+    }
+    
     // Finally close the output file
     output_file.close();
 
