@@ -1,5 +1,5 @@
 CXX = g++
-CXXFLAGS = -O3 -Wall
+CXXFLAGS = -flto -march=native -mtune=native -O3 -Wall
 
 all: pi_estimator
 
