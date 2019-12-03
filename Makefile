@@ -7,7 +7,7 @@ clean:
 	rm *.o pi_estimator
 
 pi_estimator: main.o
-	$(CXX) $(CXXFLAGS) main.o -o pi_estimator
+	$(CXX) $(CXXFLAGS) -o pi_estimator main.o 
 
 main.o: main.cpp
 	$(CXX) $(CXXFLAGS) -c main.cpp
